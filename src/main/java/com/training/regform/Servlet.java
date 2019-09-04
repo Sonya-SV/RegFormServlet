@@ -32,6 +32,7 @@ public class Servlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws IOException, ServletException {
+
         processRequest(request, response);
     }
 
@@ -46,6 +47,10 @@ public class Servlet extends HttpServlet {
         String path = request.getRequestURI();
         System.out.println(path);
         path = path.replaceAll(".*/app/", "");
+        if (path.contains("admin")){
+            request.getRequestDispatcher("/WEB-INF/admin/adminbasis.jsp").forward(request, response);
+            return;
+        }
         System.out.println(path);
         Command command = commands.getOrDefault(path,
                 (r) -> "/index.jsp)");

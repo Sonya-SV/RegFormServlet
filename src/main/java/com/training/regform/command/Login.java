@@ -38,7 +38,7 @@ public class Login implements Command {
             }
             if (user.get().getRole().equals(User.Role.ADMIN)) {
                 CommandUtility.setUserRole(request, User.Role.ADMIN, name);
-                return "/WEB-INF/admin/adminbasis.jsp";
+                return "redirect:/app/admin";
             } else if (user.get().getRole().equals(User.Role.USER)) {
                 CommandUtility.setUserRole(request, User.Role.USER, name);
                 return "/WEB-INF/user/userbasis.jsp";
