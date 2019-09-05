@@ -6,10 +6,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>User List2</title>
+    <title>User List</title>
 </head>
 <body>
-<%@ include file="parts/common.jsp" %>
+<%@ include file="../parts/common.jsp" %>
 
 <div class="container" style="margin-top: 60px">
     <div class="row">

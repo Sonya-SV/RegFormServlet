@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<%--    <link rel="stylesheet" href= "${pageContext.request.contextPath}/app/resources/css/index.css" />--%>
+    <style>
+<%--    <%@ include file="../lib/css/index.css" %>--%>
+    </style>
 </head>
 <body data-spy="scroll">
 <div class="header">
@@ -17,27 +21,23 @@
                 <a class="navbar-brand" href="">MySite</a>
                 <ul class="nav navbar-nav">
 
-                    <%--                    <c:if test="${sessionScope.user.role eq ADMIN}">--%>
-                    <%--                        <li><a href="${pageContext.request.contextPath}/app/userList">User List</a></li>--%>
-
-                    <%--                    </c:if>--%>
-
+<%--                    <c:if test="${sessionScope.user.role eq ADMIN}">--%>
+                        <li><a href="${pageContext.request.contextPath}/app/admin/userList">User List</a></li>
+                        <li><a href="${pageContext.request.contextPath}/app/user/trainSelection">Train tickets</a></li>
+<%--                    </c:if>--%>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.user.role eq GUEST}">
-                        <li><a href="${pageContext.request.contextPath}/app/login">Login</a></li>
-                        <li><a href="${pageContext.request.contextPath}/app/registration">Registration form</a></li>
+                        <li><a href="${pageContext.request.contextPath}/app/login">
+                            <span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+                        <li><a href="${pageContext.request.contextPath}/app/registration">
+                            <span class="glyphicon glyphicon-user"></span> Sign up </a></li>
                     </c:if>
-
-                    <%--                    <li><a href="${pageContext.request.contextPath}/app/exception">Exception</a></li>--%>
-
-
                     <c:if test="${sessionScope.user.role ne GUEST}">
-                        <li><a href="${pageContext.request.contextPath}/app/logout">Logout</a></li>
+                        <li><a><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/app/logout"><span
+                                class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                     </c:if>
-
-                    <c:if test="${sessionScope.user.role eq ADMIN}">
-                        <li><a href="${pageContext.request.contextPath}/app/userList">User List</a></li>
-                    </c:if>
-
                 </ul>
             </div>
         </div>

@@ -11,7 +11,7 @@
 
   <servlet>
     <servlet-name>Servlet</servlet-name>
-    <servlet-class>com.training.regform.Servlet</servlet-class>
+    <servlet-class>com.training.regform.controller.Servlet</servlet-class>
     <!--<load-on-startup>1</load-on-startup>-->
   </servlet>
 
@@ -26,7 +26,7 @@
 
   <filter>
     <filter-name>EncodingFilter</filter-name>
-    <filter-class>com.training.regform.filters.EncodingFilter</filter-class>
+    <filter-class>com.training.regform.controller.filters.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
@@ -35,7 +35,7 @@
 
   <filter>
     <filter-name>AuthFilter</filter-name>
-    <filter-class>com.training.regform.filters.AuthFilter</filter-class>
+    <filter-class>com.training.regform.controller.filters.AuthFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
@@ -44,7 +44,7 @@
 
   <listener>
     <listener-class>
-      com.training.regform.listener.SessionListener
+        com.training.regform.controller.listener.SessionListener
     </listener-class>
   </listener>
 
