@@ -16,21 +16,18 @@ public class AccessFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        User user;
-
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String path = request.getRequestURI();
-        if(path.contains("admin")) {//TODO: rewrite add user roles
-            if ((user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user")) != null) {
-                filterChain.doFilter(servletRequest,servletResponse);
-            }else{
-                servletResponse.getWriter().append("AccessDenied");
-                return;
-            }
-        }else{
-                filterChain.doFilter(servletRequest,servletResponse);
+        if (path.contains("admin")
+                && ((User) request.getSession().getAttribute("user")).getRole().equals(User.Role.ADMIN)) {
+//            if ((user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user")) != null) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            servletResponse.getWriter().append("AccessDenied");
         }
+
     }
+
 
     @Override
     public void destroy() {

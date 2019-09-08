@@ -68,8 +68,7 @@ public class JDBCUserDao implements UserDao {
 
             while (rs.next()) {
                 User user = userMapper.extractFromResultSet(rs);
-                user = userMapper
-                        .makeUnique(users, user);
+                users.putIfAbsent(user.getId(), user);
             }
                return new ArrayList<>(users.values());
 

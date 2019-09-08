@@ -1,7 +1,9 @@
 package com.training.regform.model.dao.impl;
 
 import com.training.regform.model.dao.TrainDao;
+import com.training.regform.model.entity.Route;
 import com.training.regform.model.entity.Train;
+import com.training.regform.model.mapper.RouteMapper;
 import com.training.regform.model.mapper.TrainMapper;
 import com.training.regform.model.mapper.UserMapper;
 
@@ -14,31 +16,31 @@ import java.util.*;
 public class JDBCTrainDao implements TrainDao {
     private Connection connection;
 
-    public JDBCTrainDao (Connection connection) {
+    public JDBCTrainDao(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public List<Train> findByRouteAndDateAndTime(LocalDate date, LocalTime time) {
+    public List<Train> findByRouteAndDateAndTime(LocalDate date, LocalTime time, String departure, String arrival) {
         Map<Long, Train> trains = new HashMap<>();
-        final String query = "select * from train where departure_time>=? && departure_date =?";
+        final String query = "select * from route  \n" +
+                "inner join train\n" +
+                "on route.id=id_route" +
+                " where departure_time>=? && departure_date =? && departure= ? && arrival =?";
         try (PreparedStatement st = connection.prepareStatement(query)) {
-            st.setTime (1, Time.valueOf(time));
-            st.setDate (2, Date.valueOf(date));
+            st.setTime(1, Time.valueOf(time));
+            st.setDate(2, Date.valueOf(date));
+            st.setString(3, departure);
+            st.setString(4, arrival);
             st.execute();
-            System.out.println(query);
-            System.out.println(Time.valueOf(time));
-            System.out.println(Date.valueOf(date));
-            TrainMapper trainMapper = new TrainMapper();
+            TrainMapper trainMapper = new TrainMapper(new RouteMapper());
 
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
                 Train train = trainMapper.extractFromResultSet(rs);
-//                train=trainMapper.makeUnique(trains, train);
                 trains.putIfAbsent(train.getId(), train);
             }
-            System.out.println("trains"+ trains.values().toString());
             return new ArrayList<>(trains.values());
 
         } catch (SQLException e) {

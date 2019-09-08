@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <%--    <link rel="stylesheet" href= "${pageContext.request.contextPath}/app/resources/css/index.css" />--%>
     <style>
-<%--    <%@ include file="../lib/css/index.css" %>--%>
+    <%@ include file="../lib/css/index.css" %>
     </style>
 </head>
 <body data-spy="scroll">
@@ -18,13 +18,15 @@
     <div class="navbar-fixed-top">
         <div class="container">
             <div class="navbar navbar-default">
-                <a class="navbar-brand" href="">MySite</a>
+                <a class="navbar-brand" href="">TRAINFOR</a>
                 <ul class="nav navbar-nav">
 
-<%--                    <c:if test="${sessionScope.user.role eq ADMIN}">--%>
+                    <c:if test="${sessionScope.role eq ADMIN}">
                         <li><a href="${pageContext.request.contextPath}/app/admin/userList">User List</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.user.role ne GUEST}">
                         <li><a href="${pageContext.request.contextPath}/app/user/trainSelection">Train tickets</a></li>
-<%--                    </c:if>--%>
+                    </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.user.role eq GUEST}">
@@ -40,6 +42,15 @@
                     </c:if>
                 </ul>
             </div>
+        </div>
+    </div>
+</div>
+<div class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar navbar-default">
+            <div style=" text-align: center">
+                <p>Copyright 2019, Sonya-Sv
+                    <br>All Rights Reserved</p></div>
         </div>
     </div>
 </div>

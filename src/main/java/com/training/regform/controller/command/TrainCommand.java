@@ -1,5 +1,6 @@
 package com.training.regform.controller.command;
 
+import com.training.regform.model.entity.Route;
 import com.training.regform.model.entity.Train;
 import com.training.regform.model.entity.User;
 import com.training.regform.model.service.TrainService;
@@ -30,11 +31,15 @@ public class TrainCommand implements Command {
         LocalTime time = LocalTime.parse(request.getParameter("time"));
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
-
-        List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date,time);
+//
+//        Route route = new Route();
+//        route.setDeparture(departure);
+//        route.setArrival(arrival);
+        List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date,time, departure, arrival);
+        System.out.println(trains.get(0).getRoute().getArrival());
         if (!trains.isEmpty()) {
             request.setAttribute("trains", trains);
-//            return "/app/user/trainselection.jsp";
+//            request.setAttribute("route", route);
         }
         return "/app/user/trainselection.jsp";
 

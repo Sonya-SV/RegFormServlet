@@ -31,8 +31,8 @@
                             <%--                                           value="Kyiv"--%>
                             <%--                                           required>--%>
                             <select name="departure" class="form-control form-control-lg">
-                                <option selected></option>
-                                <option>Kyiv</option>
+                                <option ></option>
+                                <option selected>Kyiv</option>
                                 <option>Lviv</option>
                                 <option>Vinnytsia</option>
                                 <option>Chernivtsi</option>
@@ -50,17 +50,17 @@
                             <%--                                    value="Cherkasy"--%>
                             <%--                                    required>--%>
                             <select name="arrival" class="form-control form-control-lg">
-                                <option selected></option>
-                                <option>Kyiv</option>
+                                <option ></option>
+                                <option >Kyiv</option>
                                 <option>Lviv</option>
-                                <option>Vinnytsia</option>
+                                <option selected>Vinnytsia</option>
                                 <option>Chernivtsi</option>
                                 <option>Kharkiv</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label id="dateLabel">Departure date</label>
-                            <input type="date" name="date" value="2019-10-01" max="2019-10-29" min="2019-09-28">
+                            <input type="date" name="date" value="2019-10-02" max="2019-10-29" min="2019-09-28">
                         </div>
                         <div class="form-group">
                             <label id="timeLabel">Departure time</label>

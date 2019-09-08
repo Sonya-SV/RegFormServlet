@@ -1,5 +1,13 @@
 body {
-    background-image: url(background-site.png) ;
-    /*background-size: cover;*/
+    background-image: url(http://russenergo.ru/wp-content/uploads/2015/07/background-site1.jpg) ;
+    background-size: cover;
     /*background: blueviolet;*/
+}
+.navbar-fixed-top {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+.btn btn-primary{
+    float: right;
 }

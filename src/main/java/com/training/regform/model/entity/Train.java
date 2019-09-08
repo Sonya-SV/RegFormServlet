@@ -3,6 +3,7 @@ package com.training.regform.model.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Train {
 
@@ -18,7 +19,7 @@ public class Train {
 
     private LocalTime arrivalTime;
 
-//    private Route route;
+    private Route route;
 
     private int freeSeats;
 
@@ -26,7 +27,8 @@ public class Train {
 
     private BigDecimal price;
 
-//    private Set<Ticket> tickets;
+    private List<User> users;
+
 
 
     public Long getId() {
@@ -114,5 +116,13 @@ public class Train {
                 ", totalSeats=" + totalSeats +
                 ", price=" + price +
                 '}';
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

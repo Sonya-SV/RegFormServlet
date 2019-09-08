@@ -1,5 +1,7 @@
 package com.training.regform.model.entity;
 
+import java.util.List;
+
 public class User {
     private Long id;
     private String username;
@@ -7,7 +9,7 @@ public class User {
     private String lastName;
     private String password;
     private Role role;
-
+    private List<Train> trains;
     public enum Role {
         ADMIN, GUEST, USER
 
