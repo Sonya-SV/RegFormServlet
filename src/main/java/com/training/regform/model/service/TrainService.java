@@ -21,6 +21,11 @@ public class TrainService {
             return dao.findByRouteAndDateAndTime(date, time, departure, arrival);
         }
     }
+    public Optional<Train> findById(Long id){
+        try (TrainDao dao = daoFactory.createTrainDao()) {
+            return dao.findById(id);
+        }
+    }
 //    public void saveUser(User user) throws SQLException {
 //        UserDao dao = daoFactory.createUserDao();
 //        dao.create(user);

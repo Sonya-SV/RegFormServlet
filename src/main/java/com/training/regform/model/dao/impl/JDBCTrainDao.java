@@ -7,6 +7,7 @@ import com.training.regform.model.mapper.RouteMapper;
 import com.training.regform.model.mapper.TrainMapper;
 import com.training.regform.model.mapper.UserMapper;
 
+import javax.swing.text.html.Option;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -56,7 +57,24 @@ public class JDBCTrainDao implements TrainDao {
     }
 
     @Override
-    public Train findById(int id) {
+    public Optional<Train> findById(Long id) {
+        final String query = "select * from train where id =?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setLong(1, id);
+            st.execute();
+            TrainMapper trainMapper = new TrainMapper(new RouteMapper());
+
+            ResultSet rs = st.executeQuery();
+            Train train=null;
+            if (rs.next()) {
+                train = trainMapper.extractFromResultSet(rs);
+            }
+            return Optional.of(train);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+//            throw new SQLException();
+        }
         return null;
     }
 

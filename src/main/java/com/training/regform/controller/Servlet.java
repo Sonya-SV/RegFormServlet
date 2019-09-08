@@ -3,6 +3,7 @@ package com.training.regform.controller;
 import com.training.regform.controller.command.*;
 import com.training.regform.controller.command.Exception;
 import com.training.regform.model.entity.User;
+import com.training.regform.model.service.TicketService;
 import com.training.regform.model.service.TrainService;
 import com.training.regform.model.service.UserService;
 
@@ -30,6 +31,10 @@ public class Servlet extends HttpServlet {
         commands.put("exception", new Exception());
         commands.put("admin/userList", new UserList(new UserService()));
         commands.put("user/trainSelection", new TrainCommand(new TrainService()));
+        commands.put("user/trainList", new TrainCommand(new TrainService()));
+        commands.put("user/order", new OrderCommand(new TrainService()));
+        commands.put("user/cart", new CartCommand());
+        commands.put("user/history", new HistoryCommand(new TicketService()));
     }
 
     public void doGet(HttpServletRequest request,
@@ -61,7 +66,11 @@ public class Servlet extends HttpServlet {
             return;
         }
         if (path.contains("user")){
-            request.getRequestDispatcher("/WEB-INF/user/trainselection.jsp").forward(request, response);
+
+            path=path.replace("user", "");
+            path=path.toLowerCase();
+            System.out.println(path);
+            request.getRequestDispatcher("/WEB-INF/user/" +path +".jsp").forward(request, response);
             return;
         }
 

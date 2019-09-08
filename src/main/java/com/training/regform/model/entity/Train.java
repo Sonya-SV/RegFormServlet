@@ -27,7 +27,7 @@ public class Train {
 
     private BigDecimal price;
 
-    private List<User> users;
+    private List<Ticket> tickets;
 
 
 

@@ -32,7 +32,7 @@ public class AuthFilter implements Filter {
         if(session.getAttribute("role")==null)
             session.setAttribute("role", User.Role.GUEST);
 //        System.out.println("role" + session.getAttribute("role"));
-        System.out.println("loggedUsers " + context.getAttribute("loggedUsers"));
+//        System.out.println("loggedUsers " + context.getAttribute("loggedUsers"));
 
         filterChain.doFilter(request,response);
 

@@ -24,25 +24,22 @@ public class TrainCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        if (isNull(request.getParameter("date")) || isNull(request.getParameter("time")))
-            return "/app/user/trainselection.jsp";
+        if (isNull(request.getParameter("departure")))
+            return "/app/user/trainSelection";
 
         LocalDate date = LocalDate.parse(request.getParameter("date"));
         LocalTime time = LocalTime.parse(request.getParameter("time"));
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
-//
-//        Route route = new Route();
-//        route.setDeparture(departure);
-//        route.setArrival(arrival);
-        List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date,time, departure, arrival);
-        System.out.println(trains.get(0).getRoute().getArrival());
+        List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date, time, departure, arrival);
         if (!trains.isEmpty()) {
             request.setAttribute("trains", trains);
-//            request.setAttribute("route", route);
+            String trainId = request.getParameter("trainId");
+            System.out.println(trainId);
+            return "/app/user/order";
         }
-        return "/app/user/trainselection.jsp";
 
+        return "/app/user/trainSelection";
     }
 }
 

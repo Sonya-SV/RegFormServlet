@@ -1,5 +1,6 @@
 package com.training.regform.model.entity;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class User {
@@ -12,9 +13,25 @@ public class User {
     private List<Train> trains;
     public enum Role {
         ADMIN, GUEST, USER
+    }
+    private BigDecimal balance;
+    private List<Ticket> tickets;
 
+    public List<Train> getTrains() {
+        return trains;
     }
 
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 
     public String getPassword() {
         return password;

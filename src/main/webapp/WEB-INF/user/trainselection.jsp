@@ -23,13 +23,6 @@
                           ng-submit="form.$valid ">
                         <div class="form-group">
                             <label id="departureLabel">From</label>
-                            <%--                                    <input type="text"--%>
-                            <%--                                           class="form-control"--%>
-                            <%--                                           name="departure"--%>
-                            <%--                                           id="departure"--%>
-                            <%--                                           placeholder=""--%>
-                            <%--                                           value="Kyiv"--%>
-                            <%--                                           required>--%>
                             <select name="departure" class="form-control form-control-lg">
                                 <option ></option>
                                 <option selected>Kyiv</option>
@@ -41,14 +34,6 @@
                         </div>
 
                         <div class="form-group">
-                            <%--                                    <label id="arrivalLabel" for="arrival"></label>--%>
-                            <%--                                    <input type="text"--%>
-                            <%--                                           class="form-control"--%>
-                            <%--                                           id="arrival"--%>
-                            <%--                                           name="arrival"--%>
-                            <%--                                           placeholder="<@spring.message " arrival"/>"--%>
-                            <%--                                    value="Cherkasy"--%>
-                            <%--                                    required>--%>
                             <select name="arrival" class="form-control form-control-lg">
                                 <option ></option>
                                 <option >Kyiv</option>
@@ -67,7 +52,7 @@
                             <input class="form-control" type="time" name="time" value="00:00" id="example-time-input">
                         </div>
 
-                        <button type="submit" class="btn btn-success" style="margin-top:30px"
+                        <button type="submit" class="btn btn-primary" style="margin-top:30px"
                                 ng-disabled="form.$invalid">
                             Find
                         </button>
@@ -80,7 +65,7 @@
         <div class="container" style="padding-top: 10%">
             <div class="row">
                 <div class="col-md-16 col-md-offset-1" style="padding-top: 50px">
-                    <%@ include file="trainList.jsp" %>
+                    <%@ include file="trainlist.jsp" %>
                 </div>
             </div>
         </div>

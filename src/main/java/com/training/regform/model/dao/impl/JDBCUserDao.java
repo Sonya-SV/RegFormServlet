@@ -33,7 +33,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
+    public Optional<User> findById(Long id) {
         return null;
     }
 

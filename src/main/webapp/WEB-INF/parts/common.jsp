@@ -20,12 +20,14 @@
             <div class="navbar navbar-default">
                 <a class="navbar-brand" href="">TRAINFOR</a>
                 <ul class="nav navbar-nav">
-
+                   <li><a href="${pageContext.request.contextPath}/app/user/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/app/user/order">Order</a></li>
                     <c:if test="${sessionScope.role eq ADMIN}">
                         <li><a href="${pageContext.request.contextPath}/app/admin/userList">User List</a></li>
                     </c:if>
                     <c:if test="${sessionScope.user.role ne GUEST}">
                         <li><a href="${pageContext.request.contextPath}/app/user/trainSelection">Train tickets</a></li>
+                        <li><a href="${pageContext.request.contextPath}/app/user/trainList">Train list</a></li>
                     </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

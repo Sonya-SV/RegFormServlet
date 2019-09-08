@@ -1,6 +1,7 @@
 package com.training.regform.model.dao.impl;
 
 import com.training.regform.model.dao.DaoFactory;
+import com.training.regform.model.dao.TicketDao;
 import com.training.regform.model.dao.TrainDao;
 import com.training.regform.model.dao.UserDao;
 
@@ -16,6 +17,11 @@ public class JDBCDaoFactory extends DaoFactory {
     public UserDao createUserDao() {
 
         return new JDBCUserDao(getConnection());
+    }
+
+    @Override
+    public TicketDao createTicketDao() {
+        return new JDBCTicketDao(getConnection());
     }
 
     @Override
