@@ -25,14 +25,14 @@
                         <td>
                             ${ticket.firstName} ${ticket.lastName}
                         </td>
-<%--                        <td>${ticket.train.number}</td>--%>
-<%--                        <td>${ticket.train.route.departure!}--%>
-<%--                            <br>${ticket.train.route.arrival!}</td>--%>
-<%--                        <td>${ticket.train.departureDate!}--%>
-<%--                            <br>${ticket.train.arrivalDate!}</td>--%>
-<%--                        <td> ${ticket.train.departureTime!}--%>
-<%--                            <br>${ticket.train.arrivalTime!}</td>--%>
-<%--                        <td> ${ticket.train.price!} UAH</td>--%>
+                        <td>${ticket.train.number}</td>
+                        <td>${ticket.train.route.departure}
+                            <br>${ticket.train.route.arrival}</td>
+                        <td>${ticket.train.departureDate}
+                            <br>${ticket.train.arrivalDate}</td>
+                        <td> ${ticket.train.departureTime}
+                            <br>${ticket.train.arrivalTime}</td>
+                        <td> ${ticket.train.price} UAH</td>
 
 
                     </tr>

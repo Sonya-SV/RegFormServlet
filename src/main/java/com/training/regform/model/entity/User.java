@@ -15,7 +15,7 @@ public class User {
         ADMIN, GUEST, USER
     }
     private BigDecimal balance;
-    private List<Ticket> tickets;
+//    private List<Ticket> tickets;
 
     public List<Train> getTrains() {
         return trains;

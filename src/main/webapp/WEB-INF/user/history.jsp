@@ -8,33 +8,29 @@
                 <#if tickets??>
                     <table class="table table-bordered  table-hover table-sm" style=" margin: auto;">
                         <tr>
-                            <th><@spring.message "passenger"/></th>
-                            <th><@spring.message "number"/></th>
-                            <th><@spring.message "from"/>/<@spring.message "to"/></th>
-                            <th><@spring.message "departure.date"/>/<@spring.message "arrival.date"/>
-                            </th>
-                            <th><@spring.message "time"/>
-                            </th>
+                        <tr>
+                            <th>Passenger</th>
+                            <th>Number</th>
+                            <th>From/To</th>
+                            <th>Departure/Arrival</th>
+                            <th>Time</th>
                         </tr>
-                        <#list tickets as ticket>
+                        </tr>
                             <tr>
-                                <td>${ticket.firstname!} ${ticket.lastName!}
+                                <td>${ticket.firstname} ${ticket.lastName}
                                 </td>
-                                <td>${ticket.train.number!}</td>
-                                <td>${ticket.train.route.departure!}
-                                    <br>${ticket.train.route.arrival!}
+                                <td>${ticket.train.number}</td>
+                                <td>${ticket.train.route.departure}
+                                    <br>${ticket.train.route.arrival}
                                 </td>
-                                <td>${ticket.train.departureDate!}
-                                    <br>${ticket.train.arrivalDate!}</td>
-                                <td> ${ticket.train.departureTime!}
-                                    <br>${ticket.train.arrivalTime!}</td>
+                                <td>${ticket.train.departureDate}
+                                    <br>${ticket.train.arrivalDate}</td>
+                                <td> ${ticket.train.departureTime}
+                                    <br>${ticket.train.arrivalTime}</td>
                             </tr>
-                        </#list>
 
                     </table>
-                <#else>
-                    <div class="text"> <@spring.message "no.tickets"/></div>
-                </#if>
+
             </div>
         </div>
     </div>

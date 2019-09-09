@@ -31,12 +31,15 @@ public class TrainCommand implements Command {
         LocalTime time = LocalTime.parse(request.getParameter("time"));
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
+
         List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date, time, departure, arrival);
         if (!trains.isEmpty()) {
             request.setAttribute("trains", trains);
-            String trainId = request.getParameter("trainId");
-            System.out.println(trainId);
-            return "/app/user/order";
+//            String trainId = request.getParameter("trainId");
+//            Long id = Long.valueOf(trainId);
+//        Optional<Train> train = trainService.findById(id);
+//        request.getSession().setAttribute("train", train);
+            return "/app/user/order.jsp";
         }
 
         return "/app/user/trainSelection";

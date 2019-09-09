@@ -8,7 +8,7 @@
             <h3 class="panel-title" style="display: inline-block">Order</h3>
         </div>
         <div class="panel-body">
-            <form method="post">
+            <form  action="${pageContext.request.contextPath}/app/user/cart">
 
                 <div class="form-group">
                     <label id="exampleInputFirstNameLabel" for="firstName">First name</label>
@@ -39,7 +39,6 @@
                         <th>Price</th>
                     </tr>
                     <tr>
-                        <c:forEach items="${trains}" var="train">
                             <td>${train.number}</td>
                             <td>${train.route.departure}
                                 <br>${train.route.arrival}</td>
@@ -47,15 +46,14 @@
                                 <br>${train.arrivalDate}</td>
                             <td> ${train.departureTime}
                                 <br>${train.arrivalTime}</td>
-                            <td> ${train.price}</td>
+                            <td> ${train.price} UAH</td>
                             <input type="hidden" value="${train.id}" name="trainId">
-                        </c:forEach>
                     </tr>
                 </table>
-                <a href="${pageContext.request.contextPath}/app/user/cart" type="submit" class="btn btn-primary" style="margin-top:30px"
+                <button type="submit" class="btn btn-primary" style="margin-top:30px"
                         ng-disabled="form.$invalid">
                     Add to ticket
-                </a>
+                </button>
             </form>
         </div>
     </div>

@@ -12,8 +12,8 @@ public class RouteMapper implements ObjectMapper<Route> {
     public Route extractFromResultSet(ResultSet rs) throws SQLException {
         Route route = new Route();
         route.setId(rs.getLong("id"));
-        route.setArrival(rs.getString("arrival"));
-        route.setDeparture(rs.getString("departure"));
+//        route.setArrival(rs.getString("arrival"));
+//        route.setDeparture(rs.getString("departure"));
         return route;
     }
 }

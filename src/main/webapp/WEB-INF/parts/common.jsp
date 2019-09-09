@@ -38,7 +38,16 @@
                             <span class="glyphicon glyphicon-user"></span> Sign up </a></li>
                     </c:if>
                     <c:if test="${sessionScope.user.role ne GUEST}">
-                        <li><a><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a></li>
+                        <li>
+                            <select>
+                                <option selected> <a><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a></option>
+                                <option>Profile</option>
+                                <option>Account</option>
+                            
+                            </select>
+                            
+                        
+                        </li>
                         <li><a href="${pageContext.request.contextPath}/app/logout"><span
                                 class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                     </c:if>

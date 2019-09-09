@@ -4,6 +4,7 @@ import com.training.regform.model.dao.UserDao;
 import com.training.regform.model.entity.User;
 import com.training.regform.model.mapper.UserMapper;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 
@@ -17,13 +18,14 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void create(User entity) throws SQLException {
-        final String query = "insert into user(username, first_name, last_name, password, role) values (?,?,?,?,?)";
+        final String query = "insert into user(username, first_name, last_name, password, role, balance) values (?,?,?,?,?,?)";
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setString (1, entity.getUsername());
             st.setString   (2, entity.getFirstName());
             st.setString(3, entity.getLastName());
             st.setString(4, entity.getPassword());
             st.setString(5, entity.getRole().name());
+            st.setBigDecimal(6, BigDecimal.ZERO);
             st.execute();
 
         } catch (SQLException e) {
