@@ -20,6 +20,6 @@ public class HistoryCommand implements Command {
         List<Ticket> tickets = ticketService.getAllTicketByUser((User)request.getSession().getAttribute("user"));
         request.setAttribute("tickets", tickets);
 
-        return "app/user/history";
+        return "/app/user/history";
     }
 }

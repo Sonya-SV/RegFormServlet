@@ -1,5 +1,6 @@
 package com.training.regform.model.dao.impl;
 
+import com.training.regform.controller.exception.NoSeatsException;
 import com.training.regform.model.dao.TrainDao;
 import com.training.regform.model.entity.Route;
 import com.training.regform.model.entity.Train;
@@ -19,6 +20,22 @@ public class JDBCTrainDao implements TrainDao {
 
     public JDBCTrainDao(Connection connection) {
         this.connection = connection;
+    }
+
+
+    @Override
+    public void bookTheSeat(Train train) throws NoSeatsException {
+        final String queryForTrain = "UPDATE train SET free_seats = ? WHERE id = ?";
+        try(PreparedStatement stTrain = connection.prepareStatement(queryForTrain)){
+            if (train.getFreeSeats()<0)
+                throw new NoSeatsException();
+            train.setFreeSeats(train.getFreeSeats() - 1);
+            stTrain.setInt(1, train.getFreeSeats());
+            stTrain.setLong(2, train.getId());
+            stTrain.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

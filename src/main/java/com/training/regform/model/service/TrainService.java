@@ -1,5 +1,6 @@
 package com.training.regform.model.service;
 
+import com.training.regform.controller.exception.NoSeatsException;
 import com.training.regform.model.dao.DaoFactory;
 import com.training.regform.model.dao.TrainDao;
 import com.training.regform.model.dao.UserDao;
@@ -26,10 +27,14 @@ public class TrainService {
             return dao.findById(id);
         }
     }
-
-//    public void bookTheTicket(Train train) {
+    public void bookTheSeat(Train train) throws NoSeatsException {
+        try(TrainDao trainDao = daoFactory.createTrainDao()){
+            trainDao.bookTheSeat(train);
+        }
+    }
+//    public void buyTheTicket(Train train) {
 //        try (TrainDao dao = daoFactory.createTrainDao()) {
-//           dao.bookTheTicket(train);
+//           dao.buyTheTicket(train);
 //        }
 //    }
 //    public void saveUser(User user) throws SQLException {

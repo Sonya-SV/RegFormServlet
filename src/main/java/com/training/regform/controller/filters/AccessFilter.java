@@ -18,9 +18,7 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String path = request.getRequestURI();
-        if (path.contains("admin")
-                && ((User) request.getSession().getAttribute("user")).getRole().equals(User.Role.ADMIN)) {
-//            if ((user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user")) != null) {
+        if (path.contains("admin") && ((User) request.getSession().getAttribute("user")).getRole().equals(User.Role.ADMIN)) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             servletResponse.getWriter().append("AccessDenied");

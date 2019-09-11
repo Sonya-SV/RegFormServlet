@@ -1,5 +1,6 @@
 package com.training.regform.controller.command;
 
+import com.training.regform.controller.exception.NoSeatsException;
 import com.training.regform.model.entity.Ticket;
 import com.training.regform.model.entity.Train;
 import com.training.regform.model.entity.User;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 public class OrderCommand implements Command {
 
+    public static final String NO_SEATS = "No more seats";
     private TrainService trainService;
 
     public OrderCommand(TrainService trainService) {
@@ -26,19 +28,16 @@ public class OrderCommand implements Command {
 
         Optional<Train> train = trainService.findById(trainId);
 
-        System.out.println(trainId);
-
         train.ifPresent(value -> request.getSession().setAttribute("train", value));
+
         request.getSession().setAttribute("train", train.get());
         request.getSession().setAttribute("user", request.getSession().getAttribute("user"));
-        System.out.println(train.get());
-
-//        String trainId = request.getParameter("trainId");
-//        if (firstName == null || firstName.equals("") || lastName == null || lastName.equals("")) {
-//            return "/app/user/order.jsp";
+//        try{
+//            trainService.bookTheSeat(train.get());
+//        }catch (NoSeatsException e){
+//            request.setAttribute("noSeatsError", NO_SEATS);
+//            return "/app/user/order";
 //        }
-
-
         return "redirect:/app/user/cart.jsp";
     }
 }

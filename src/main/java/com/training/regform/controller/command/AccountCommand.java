@@ -24,7 +24,7 @@ public class AccountCommand implements Command {
         if (sum == null)
             return "/app/user/account.jsp";
         BigDecimal replenishmentAmount = new BigDecimal(sum);
-        //todo REWRITE checking in command
+        //todo REWRITE checking in command add delete from cart
 
         if (replenishmentAmount.compareTo(BigDecimal.ZERO) > 0)
             userService.updateAccount(user, replenishmentAmount);

@@ -1,14 +1,16 @@
 <html>
 <body>
 <%@ include file="../parts/common.jsp" %>
-
+<div class="text-danger">
+    ${noSeatsError}
+</div>
 <div class="col-md-6 col-md-offset-3" style="padding-top: 50px">
     <div class="panel panel-default">
         <div class=" panel-heading">
             <h3 class="panel-title" style="display: inline-block">Order</h3>
         </div>
         <div class="panel-body">
-            <form  action="${pageContext.request.contextPath}/app/user/cart">
+            <form action="${pageContext.request.contextPath}/app/user/cart">
 
                 <div class="form-group">
                     <label id="exampleInputFirstNameLabel" for="firstName">First name</label>
@@ -39,15 +41,15 @@
                         <th>Price</th>
                     </tr>
                     <tr>
-                            <td>${train.number}</td>
-                            <td>${train.route.departure}
-                                <br>${train.route.arrival}</td>
-                            <td>${train.departureDate}
-                                <br>${train.arrivalDate}</td>
-                            <td> ${train.departureTime}
-                                <br>${train.arrivalTime}</td>
-                            <td> ${train.price} UAH</td>
-                            <input type="hidden" value="${train.id}" name="trainId">
+                        <td>${train.number}</td>
+                        <td>${train.route.departure}
+                            <br>${train.route.arrival}</td>
+                        <td>${train.departureDate}
+                            <br>${train.arrivalDate}</td>
+                        <td> ${train.departureTime}
+                            <br>${train.arrivalTime}</td>
+                        <td> ${train.price} UAH</td>
+                        <input type="hidden" value="${train.id}" name="trainId">
                     </tr>
                 </table>
                 <button type="submit" class="btn btn-primary" style="margin-top:30px"

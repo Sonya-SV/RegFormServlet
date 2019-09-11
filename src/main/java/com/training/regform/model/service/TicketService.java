@@ -1,6 +1,7 @@
 package com.training.regform.model.service;
 
 import com.training.regform.controller.exception.BalanceException;
+import com.training.regform.controller.exception.NoSeatsException;
 import com.training.regform.model.dao.DaoFactory;
 import com.training.regform.model.dao.TicketDao;
 import com.training.regform.model.entity.Ticket;
@@ -17,9 +18,9 @@ public class TicketService {
             return dao.findAllTicketsByUser(user);
         }
     }
-    public void saveTicket(Ticket ticket) throws SQLException, BalanceException {
+    public void saveTicket(Ticket ticket) throws SQLException, BalanceException, NoSeatsException {
         try (TicketDao dao = daoFactory.createTicketDao()) {
-            dao.bookTheTicket(ticket, ticket.getTrain().getPrice());
+            dao.buyTheTicket(ticket, ticket.getTrain().getPrice());
         }
     }
 }

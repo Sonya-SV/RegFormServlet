@@ -1,6 +1,7 @@
 package com.training.regform.model.dao.impl;
 
 import com.training.regform.controller.exception.BalanceException;
+import com.training.regform.controller.exception.NoSeatsException;
 import com.training.regform.model.dao.TicketDao;
 import com.training.regform.model.entity.Ticket;
 import com.training.regform.model.entity.User;
@@ -25,24 +26,28 @@ public class JDBCTicketDao implements TicketDao {
     }
 
     @Override
-    public void bookTheTicket(Ticket ticket, BigDecimal replenishment) throws BalanceException, SQLException{
+    public void buyTheTicket(Ticket ticket, BigDecimal replenishment) throws BalanceException, SQLException, NoSeatsException {
 
-        final String queryForTrain = "UPDATE train SET free_seats = ? WHERE id = ?";
+
         final String queryForUser = "UPDATE user SET balance = ? WHERE id = ?";
         final String queryForTicket = "insert into ticket(first_name, last_name, train_id, user_id) values (?,?,?,?)";
-        try (PreparedStatement stTrain = connection.prepareStatement(queryForTrain);
-             PreparedStatement stUser = connection.prepareStatement(queryForUser);
-             PreparedStatement stTicket = connection.prepareStatement(queryForTicket)) {
+        final String queryForTrain = "UPDATE train SET free_seats = ? WHERE id = ?";
+        try (PreparedStatement stUser = connection.prepareStatement(queryForUser);
+             PreparedStatement stTicket = connection.prepareStatement(queryForTicket);
+             PreparedStatement stTrain = connection.prepareStatement(queryForTrain)) {
 
             connection.setAutoCommit(false);
+
+            if (ticket.getTrain().getFreeSeats() <= 0)
+                throw new NoSeatsException();
+            if (ticket.getUser().getBalance().compareTo(replenishment) < 0)
+                throw new BalanceException();
+
 
             ticket.getTrain().setFreeSeats(ticket.getTrain().getFreeSeats() - 1);
             stTrain.setInt(1, ticket.getTrain().getFreeSeats());
             stTrain.setLong(2, ticket.getTrain().getId());
-
-
-            if (ticket.getUser().getBalance().compareTo(replenishment) < 0)
-                throw new BalanceException();
+            stTrain.execute();
 
             ticket.getUser().setBalance(ticket.getUser().getBalance().subtract(replenishment));
             stUser.setBigDecimal(1, ticket.getUser().getBalance());
@@ -53,14 +58,12 @@ public class JDBCTicketDao implements TicketDao {
             stTicket.setLong(3, ticket.getTrain().getId());
             stTicket.setLong(4, ticket.getUser().getId());
 
-
-
             stTrain.execute();
             stUser.execute();
             stTicket.execute();
 
             connection.commit();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException ex) {
@@ -77,8 +80,8 @@ public class JDBCTicketDao implements TicketDao {
         final String query = "select * from ticket inner join train " +
                 "on train_id = train.id inner join route " +
                 "on route_id = route.id  inner join user u " +
-                "on user_id = u.id where user_id = ?" +
-                "order by id desc ";
+                "on user_id = u.id where user_id = ?";
+//                "order by ticket.id desc";
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setLong(1, user.getId());
             TicketMapper ticketMapper = new TicketMapper(new TrainMapper(new RouteMapper()), new UserMapper());
