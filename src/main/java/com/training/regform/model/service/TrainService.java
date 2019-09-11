@@ -26,6 +26,12 @@ public class TrainService {
             return dao.findById(id);
         }
     }
+
+//    public void bookTheTicket(Train train) {
+//        try (TrainDao dao = daoFactory.createTrainDao()) {
+//           dao.bookTheTicket(train);
+//        }
+//    }
 //    public void saveUser(User user) throws SQLException {
 //        UserDao dao = daoFactory.createUserDao();
 //        dao.create(user);

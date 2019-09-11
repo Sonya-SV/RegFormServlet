@@ -10,8 +10,16 @@
             <h3 class="panel-title" style="display: inline-block">Cart</h3>
         </div>
 
+        <c:if test="${emptyCart ne null}">
+            <div class="jumbotron" style="text-align: center; background: transparent">
+                ${emptyCart}
+            </div>
+        </c:if>
+        <c:if test="${ticket ne null}">
         <div class="panel-body">
-            <form action="/ticket/pay" method="post" name="formTicket" style="margin: auto">
+            <form action="${pageContext.request.contextPath}/app/user/cart" method="post" name="formTicket"
+                  style="margin: auto">
+
                 <table class="table table-bordered  table-hover table-sm" style=" margin: auto;">
                     <tr>
                         <th>Passenger</th>
@@ -20,6 +28,7 @@
                         <th>Departure/Arrival</th>
                         <th>Time</th>
                         <th>Price</th>
+                        <th>Delete</th>
                     </tr>
                     <tr>
                         <td>
@@ -33,15 +42,25 @@
                         <td> ${ticket.train.departureTime}
                             <br>${ticket.train.arrivalTime}</td>
                         <td> ${ticket.train.price} UAH</td>
-
+                        <td>
+                            Delete
+                        </td>
 
                     </tr>
                 </table>
 
-                <p></p>
-                <button type="submit">Pay</button>
+                <div class="text-danger">
+                    <c:if test="${errorPay ne null}">
+                        ${errorPay}
+                    </c:if>
+                </div>
+                <a type="submit">
+                <button class="btn btn-primary">Pay</button>
+                </a>
+
             </form>
         </div>
+        </c:if>
     </div>
 </div>
 </body>

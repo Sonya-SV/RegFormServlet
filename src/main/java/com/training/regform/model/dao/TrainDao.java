@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface TrainDao extends GenericDao<Train> {
     List<Train> findByRouteAndDateAndTime(LocalDate date, LocalTime time, String departure, String arrival);
+
+
 }

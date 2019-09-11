@@ -16,8 +16,10 @@ public class HistoryCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+
         List<Ticket> tickets = ticketService.getAllTicketByUser((User)request.getSession().getAttribute("user"));
-        request.getSession().setAttribute("tickets", tickets);
-        return "app/user/history.jsp";
+        request.setAttribute("tickets", tickets);
+
+        return "app/user/history";
     }
 }

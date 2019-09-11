@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class TrainMapper implements ObjectMapper<Train> {
+public class TrainMapper implements ObjectMapper<Train>{
 
     private RouteMapper routeMapper;
 
@@ -29,16 +29,15 @@ public class TrainMapper implements ObjectMapper<Train> {
         train.setFreeSeats(rs.getInt("free_seats"));
         train.setTotalSeats(rs.getInt("total_seats"));
         train.setPrice(rs.getBigDecimal("price"));
-        train.setRoute(routeMapper.extractFromResultSet(rs));
+
+        Route route = new Route();
+        route.setArrival(rs.getString("arrival"));
+        route.setDeparture(rs.getString("departure"));
+        route.setId(rs.getLong("route_id"));
+
+        train.setRoute(route);
 
         return train;
     }
 
-//    //TODO delete
-//    @Override
-//    public Train makeUnique(Map<Long, Train> cache,
-//                           Train train) {
-//        cache.putIfAbsent(train.getId(), train);
-//        return cache.get(train.getId());
-//    }
 }

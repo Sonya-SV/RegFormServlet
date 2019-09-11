@@ -33,8 +33,10 @@ public class Servlet extends HttpServlet {
         commands.put("user/trainSelection", new TrainCommand(new TrainService()));
         commands.put("user/trainList", new TrainCommand(new TrainService()));
         commands.put("user/order", new OrderCommand(new TrainService()));
-        commands.put("user/cart", new CartCommand());
+        commands.put("user/cart", new CartCommand( new TicketService()));
         commands.put("user/history", new HistoryCommand(new TicketService()));
+        commands.put("user/account", new AccountCommand(new UserService()));
+        commands.put("user/profile", new ProfileCommand(new UserService()));
     }
 
     public void doGet(HttpServletRequest request,

@@ -26,8 +26,8 @@ public class JDBCTrainDao implements TrainDao {
         Map<Long, Train> trains = new HashMap<>();
         final String query = "select * from route  \n" +
                 "inner join train\n" +
-                "on route.id=id_route" +
-                " where departure_time>=? && departure_date =? && departure= ? && arrival =?";
+                "on route.id=route_id" +
+                " where departure_time>=? && departure_date =? && departure= ? && arrival =? && free_seats>0";
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setTime(1, Time.valueOf(time));
             st.setDate(2, Date.valueOf(date));
@@ -51,6 +51,18 @@ public class JDBCTrainDao implements TrainDao {
         return null;
     }
 
+    public void bookTheTicket(Train train) {
+        train.setFreeSeats(train.getFreeSeats()-1);
+        final String query = "UPDATE train SET free_seats = ? WHERE id = ?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setInt(1, train.getFreeSeats());
+            st.setLong(2, train.getId());
+            st.execute();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void create(Train entity) throws SQLException {
 
@@ -58,7 +70,7 @@ public class JDBCTrainDao implements TrainDao {
 
     @Override
     public Optional<Train> findById(Long id) {
-        final String query = "select * from train where id =?";
+        final String query = "select * from train inner join route on route.id=route_id where train.id =?";
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setLong(1, id);
             st.execute();
@@ -69,7 +81,7 @@ public class JDBCTrainDao implements TrainDao {
             if (rs.next()) {
                 train = trainMapper.extractFromResultSet(rs);
             }
-            return Optional.of(train);
+            return Optional.ofNullable(train);
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -12,10 +12,23 @@ public class JDBCUserDao implements UserDao {
     private Connection connection;
 
 
+
     public JDBCUserDao(Connection connection) {
         this.connection = connection;
     }
 
+    @Override
+    public void updateBalance(User user, BigDecimal replenishment) {
+        user.setBalance(user.getBalance().add(replenishment));
+        final String query = "UPDATE user SET balance = ? WHERE id = ?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setBigDecimal(1, user.getBalance());
+            st.setLong(2, user.getId());
+            st.execute();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void create(User entity) throws SQLException {
         final String query = "insert into user(username, first_name, last_name, password, role, balance) values (?,?,?,?,?,?)";
@@ -36,7 +49,21 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public Optional<User> findById(Long id) {
+        final String query = "select * from user where id=?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setLong (1, id);
+            UserMapper userMapper = new UserMapper();
+            ResultSet rs = st.executeQuery();
+            Optional<User> user=Optional.empty();
+            if(rs.next())
+                user=Optional.of(userMapper.extractFromResultSet(rs));
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
+
     }
 
     @Override
@@ -82,7 +109,18 @@ public class JDBCUserDao implements UserDao {
 
 
     @Override
-    public void update(User entity) {
+    public void update(User entity) throws SQLException {
+        final String query = "update user set first_name=?, last_name=?, password=? where username=?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setString (1, entity.getFirstName());
+            st.setString (2, entity.getLastName());
+            st.setString (3, entity.getPassword());
+            st.setString (4, entity.getUsername());
+            st.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException();
+        }
     }
 
     @Override

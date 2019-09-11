@@ -10,7 +10,7 @@ public interface GenericDao<T> extends AutoCloseable {
     Optional<T> findById(Long id);
     List<T> findAll();
 //    List<T> findByUsername();
-    void update(T entity);
+    void update(T entity) throws SQLException;
     void delete(int id);
     void close();
 }

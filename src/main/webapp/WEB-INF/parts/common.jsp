@@ -20,14 +20,11 @@
             <div class="navbar navbar-default">
                 <a class="navbar-brand" href="">TRAINFOR</a>
                 <ul class="nav navbar-nav">
-                   <li><a href="${pageContext.request.contextPath}/app/user/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/app/user/order">Order</a></li>
                     <c:if test="${sessionScope.role eq ADMIN}">
                         <li><a href="${pageContext.request.contextPath}/app/admin/userList">User List</a></li>
                     </c:if>
                     <c:if test="${sessionScope.user.role ne GUEST}">
                         <li><a href="${pageContext.request.contextPath}/app/user/trainSelection">Train tickets</a></li>
-                        <li><a href="${pageContext.request.contextPath}/app/user/trainList">Train list</a></li>
                     </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -37,17 +34,17 @@
                         <li><a href="${pageContext.request.contextPath}/app/registration">
                             <span class="glyphicon glyphicon-user"></span> Sign up </a></li>
                     </c:if>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.user.role ne GUEST}">
-                        <li>
-                            <select>
-                                <option selected> <a><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a></option>
-                                <option>Profile</option>
-                                <option>Account</option>
-                            
-                            </select>
-                            
-                        
-                        </li>
+
+                        <li><a><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.username}</a> </li>
+                        <li><a href="${pageContext.request.contextPath}/app/user/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>
+                        <li>   <a href="${pageContext.request.contextPath}/app/user/profile"> Profile</a> </li>
+                             <li>  <a href="${pageContext.request.contextPath}/app/user/account">Account</a> </li>
+                             <li>  <a href="${pageContext.request.contextPath}/app/user/history">History</a> </li>
+
+
                         <li><a href="${pageContext.request.contextPath}/app/logout"><span
                                 class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                     </c:if>

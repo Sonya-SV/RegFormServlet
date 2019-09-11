@@ -35,10 +35,6 @@ public class TrainCommand implements Command {
         List<Train> trains = trainService.getAllTrainsByRouteAndDateAndTime(date, time, departure, arrival);
         if (!trains.isEmpty()) {
             request.setAttribute("trains", trains);
-//            String trainId = request.getParameter("trainId");
-//            Long id = Long.valueOf(trainId);
-//        Optional<Train> train = trainService.findById(id);
-//        request.getSession().setAttribute("train", train);
             return "/app/user/order.jsp";
         }
 

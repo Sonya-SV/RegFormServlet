@@ -1,14 +1,12 @@
 package com.training.regform.model.service;
 
+import com.training.regform.controller.exception.BalanceException;
 import com.training.regform.model.dao.DaoFactory;
 import com.training.regform.model.dao.TicketDao;
-import com.training.regform.model.dao.TrainDao;
 import com.training.regform.model.entity.Ticket;
-import com.training.regform.model.entity.Train;
 import com.training.regform.model.entity.User;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TicketService {
@@ -17,6 +15,11 @@ public class TicketService {
     public List<Ticket> getAllTicketByUser(User user){
         try (TicketDao dao = daoFactory.createTicketDao()) {
             return dao.findAllTicketsByUser(user);
+        }
+    }
+    public void saveTicket(Ticket ticket) throws SQLException, BalanceException {
+        try (TicketDao dao = daoFactory.createTicketDao()) {
+            dao.bookTheTicket(ticket, ticket.getTrain().getPrice());
         }
     }
 }

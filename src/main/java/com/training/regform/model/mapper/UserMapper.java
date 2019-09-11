@@ -18,16 +18,11 @@ public class UserMapper implements ObjectMapper<User> {
         user.setLastName(rs.getString("last_name"));
         user.setPassword(rs.getString("password"));
         user.setBalance(rs.getBigDecimal("balance"));
+
         for (User.Role role : User.Role.values())
             if (role.name().equals(rs.getObject("role")))
                 user.setRole(role);
         return user;
     }
 
-//    @Override
-//    public User makeUnique(Map<Long, User> cache,
-//                           User user) {
-//        cache.putIfAbsent(user.getId(), user);
-//        return cache.get(user.getId());
-//    }
 }
